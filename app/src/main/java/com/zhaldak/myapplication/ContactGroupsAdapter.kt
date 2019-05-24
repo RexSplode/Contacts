@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zhaldak.myapplication.datadase.ContactGroup
 import kotlinx.android.synthetic.main.contact_group_card.view.*
 
-class ContactGroupsAdapter(val items: ArrayList<ContactGroup>, val context: Context) :
+class ContactGroupsAdapter(val items: List<ContactGroup>, val context: Context) :
     RecyclerView.Adapter<GroupsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupsViewHolder {

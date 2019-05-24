@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.zhaldak.myapplication.datadase.ContactGroup
 import kotlinx.android.synthetic.main.contact_groups_fragment.*
 
 
@@ -29,11 +31,14 @@ class ContactGroupsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ContactGroupsViewModel::class.java)
+        viewModel.insertTestInformation()
 
         recycler.layoutManager = LinearLayoutManager(context)
-        val items = viewModel.getContactGroups()
+        viewModel.groups.observe(this, Observer<List<ContactGroup>> {
+            recycler.adapter = ContactGroupsAdapter(it, context!!)
+        })
 
-        recycler.adapter = ContactGroupsAdapter(items, context!!)
+
 
     }
 
