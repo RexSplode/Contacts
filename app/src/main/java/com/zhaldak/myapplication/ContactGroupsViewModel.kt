@@ -7,14 +7,21 @@ import androidx.lifecycle.MutableLiveData
 import com.zhaldak.myapplication.datadase.AppDatabase
 import com.zhaldak.myapplication.datadase.ContactGroup
 import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class ContactGroupsViewModel(app: Application) : AndroidViewModel(app) {
+class ContactGroupsViewModel(app: Application) : AndroidViewModel(app), CoroutineScope {
     var groups: MutableLiveData<List<ContactGroup>> = MutableLiveData()
     private var database: AppDatabase = AppDatabase.getDatabase(app)
+
     private var groupsDao = database.getGroupsDao()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
+    private  val job: Job = Job()
+
 
     fun insertTestInformation() {
-        GlobalScope.launch(Dispatchers.Main) {
+        launch(Dispatchers.Main) {
             groups.value = withContext(Dispatchers.Default) {
                 getContactGroups().forEach {
                     groupsDao.insert(it)
@@ -34,5 +41,10 @@ class ContactGroupsViewModel(app: Application) : AndroidViewModel(app) {
             ContactGroup(name = "Other people of planet Earth", description = "Yeah, in case I will need to add them", color = R.color.colorPrimary),
             ContactGroup(name = "People from the Milky Way", description = "The galaxy is our common home", color = R.color.colorAccent)
         )
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
     }
 }

@@ -12,7 +12,8 @@ class ContactGroupsAdapter(val items: List<ContactGroup>, val context: Context) 
     RecyclerView.Adapter<GroupsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupsViewHolder {
-        return GroupsViewHolder(LayoutInflater.from(context).inflate(R.layout.contact_group_card, parent, false))
+        return GroupsViewHolder(LayoutInflater.from(context)
+            .inflate(R.layout.contact_group_card, parent, false))
     }
 
     override fun onBindViewHolder(holder: GroupsViewHolder, position: Int) {
