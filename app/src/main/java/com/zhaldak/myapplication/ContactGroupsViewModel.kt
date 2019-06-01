@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.zhaldak.myapplication.datadase.AppDatabase
 import com.zhaldak.myapplication.datadase.ContactGroup
+import kotlinx.coroutines.*
 
 class ContactGroupsViewModel(app: Application) : AndroidViewModel(app) {
     var groups: MutableLiveData<List<ContactGroup>> = MutableLiveData()
@@ -13,10 +14,14 @@ class ContactGroupsViewModel(app: Application) : AndroidViewModel(app) {
     private var groupsDao = database.getGroupsDao()
 
     fun insertTestInformation() {
-        getContactGroups().forEach {
-            groupsDao.insert(it)
+        GlobalScope.launch(Dispatchers.Main) {
+            groups.value = withContext(Dispatchers.Default) {
+                getContactGroups().forEach {
+                    groupsDao.insert(it)
+                }
+                groupsDao.getAll()
+            }
         }
-        groups.value = groupsDao.getAll()
     }
 
 
