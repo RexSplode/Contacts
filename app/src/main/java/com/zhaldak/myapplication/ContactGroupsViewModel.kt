@@ -30,7 +30,7 @@ class ContactGroupsViewModel(app: Application) : AndroidViewModel(app), Coroutin
 
 
     fun saveGroup(group: ContactGroup) {
-        GlobalScope.launch(Dispatchers.Default) {
+        launch(Dispatchers.Default) {
             groupsDao.insert(group)
         }
         requestGroups()
