@@ -13,26 +13,19 @@ class ContactGroupsViewModel(app: Application) : AndroidViewModel(app) {
     private var database: AppDatabase = AppDatabase.getDatabase(app)
     private var groupsDao = database.getGroupsDao()
 
-    fun insertTestInformation() {
+    fun requestGroups() {
         GlobalScope.launch(Dispatchers.Main) {
             groups.value = withContext(Dispatchers.Default) {
-                getContactGroups().forEach {
-                    groupsDao.insert(it)
-                }
                 groupsDao.getAll()
             }
         }
     }
 
 
-    private fun getContactGroups(): ArrayList<ContactGroup> {
-        return arrayListOf(
-            ContactGroup(name = "Parents",description =  "My parents and family", color = R.color.yellow),
-            ContactGroup(name = "Work", description = "My colleagues and boss", color = R.color.blue),
-            ContactGroup(name = "Friends", description = "My friends and schoolmates", color = R.color.pink),
-            ContactGroup(name = "Someone I don't know", description = "Some people I met on the street", color =  R.color.white),
-            ContactGroup(name = "Other people of planet Earth", description = "Yeah, in case I will need to add them", color = R.color.colorPrimary),
-            ContactGroup(name = "People from the Milky Way", description = "The galaxy is our common home", color = R.color.colorAccent)
-        )
+    fun saveGroup(group: ContactGroup) {
+        GlobalScope.launch(Dispatchers.Default) {
+            groupsDao.insert(group)
+        }
+        requestGroups()
     }
 }

@@ -1,6 +1,7 @@
 package com.zhaldak.myapplication
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,8 @@ class ContactGroupsAdapter(val items: List<ContactGroup>, val context: Context) 
     override fun onBindViewHolder(holder: GroupsViewHolder, position: Int) {
         holder.titleTxt?.text = items[position].name
         holder.descriptionTxt?.text = items[position].description
-        holder.card.setCardBackgroundColor(context.resources.getColor(items[position].color))
+        val hexColor = "#${java.lang.Integer.toHexString(items[position].color)}"
+        holder.card.setCardBackgroundColor(Color.parseColor(hexColor))
     }
 
     // Gets the number of animals in the list
