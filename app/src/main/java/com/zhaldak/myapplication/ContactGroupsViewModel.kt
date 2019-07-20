@@ -6,11 +6,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.zhaldak.myapplication.datadase.AppDatabase
 import com.zhaldak.myapplication.datadase.ContactGroup
+import com.zhaldak.myapplication.datadase.ContactGroupWithContacts
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class ContactGroupsViewModel(app: Application) : AndroidViewModel(app), CoroutineScope {
-    var groups: MutableLiveData<List<ContactGroup>> = MutableLiveData()
+    var groups: MutableLiveData<List<ContactGroupWithContacts>> = MutableLiveData()
     private var database: AppDatabase = AppDatabase.getDatabase(app)
 
     private var groupsDao = database.getGroupsDao()

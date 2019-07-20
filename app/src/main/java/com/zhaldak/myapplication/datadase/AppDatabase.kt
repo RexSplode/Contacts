@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [ContactGroup::class], version = 1)
+@Database(entities = [ContactGroup::class, Contact::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getGroupsDao(): ContactGroupsDao
+    abstract fun getContactsDao(): ContactsDao
 
     companion object {
         @Volatile
@@ -26,7 +27,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "database"
                 )
-//                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 return instance

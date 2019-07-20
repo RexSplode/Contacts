@@ -12,6 +12,7 @@ import com.zhaldak.myapplication.datadase.ContactGroup
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.contact_groups_fragment.*
 import androidx.appcompat.app.AlertDialog
+import com.zhaldak.myapplication.datadase.ContactGroupWithContacts
 import kotlinx.android.synthetic.main.add_group_dialog.view.*
 
 
@@ -38,8 +39,10 @@ class ContactGroupsFragment : Fragment() {
         viewModel.requestGroups()
 
         recycler.layoutManager = LinearLayoutManager(context)
-        viewModel.groups.observe(this, Observer<List<ContactGroup>> {
-            recycler.adapter = ContactGroupsAdapter(it, context!!)
+        viewModel.groups.observe(this, Observer<List<ContactGroupWithContacts>> {
+            val mainActivity = activity as MainActivity
+            val addContactViewModel = ViewModelProviders.of(mainActivity).get(AddContactViewModel::class.java)
+            recycler.adapter = ContactGroupsAdapter(it, mainActivity, addContactViewModel)
         })
 
         activity?.fab?.setOnClickListener {
@@ -52,6 +55,7 @@ class ContactGroupsFragment : Fragment() {
     private fun createAndShowGroupDialog() {
         val builder = AlertDialog.Builder(context!!)
         builder.setTitle(R.string.add_contact_group)
+
 
         val dialogView = layoutInflater
             .inflate(R.layout.add_group_dialog, null)
