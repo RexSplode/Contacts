@@ -45,9 +45,13 @@ class ContactGroupsFragment : Fragment() {
             recycler.adapter = ContactGroupsAdapter(it, mainActivity, addContactViewModel)
         })
 
-        activity?.fab?.setOnClickListener {
-            createAndShowGroupDialog()
+        activity?.fab?.apply {
+            visibility = View.VISIBLE
+            setOnClickListener {
+                createAndShowGroupDialog()
+            }
         }
+
 
 
     }

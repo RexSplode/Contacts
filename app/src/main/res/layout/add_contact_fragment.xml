@@ -41,12 +41,14 @@
             android:layout_marginEnd="8dp"/>
     <ImageView
             android:src="@drawable/baseline_add_black_48"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:maxHeight="100dp"
+            android:maxWidth="100dp"
             android:id="@+id/imagePhoto"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/editPhone"
+            app:layout_constraintBottom_toBottomOf="@+id/editEmail"
             app:layout_constraintStart_toEndOf="@+id/editPhone"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
