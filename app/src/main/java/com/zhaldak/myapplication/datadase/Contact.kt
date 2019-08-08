@@ -18,5 +18,6 @@ class Contact(
     var email: String? = null,
     var phone: String? = null,
     var comment: String? = null,
-    var photoUrl: String? = null
+    var photoUrl: String? = null,
+    var facebookId: String? = null
 )

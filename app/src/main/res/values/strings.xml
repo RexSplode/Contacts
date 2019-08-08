@@ -13,4 +13,5 @@
     <string name="email">Email</string>
     <string name="comments">Comments</string>
     <string name="save">Save contact</string>
+    <string name="facebook_id">Facebook id</string>
 </resources>

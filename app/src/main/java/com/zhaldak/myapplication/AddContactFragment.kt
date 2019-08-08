@@ -49,13 +49,15 @@ class AddContactFragment : Fragment() {
             val phone = editPhone.text.toString()
             val email = editEmail.text.toString()
             val comment = editComments.text.toString()
+            val facebookId = editFacebook.text.toString()
 
             val contact = Contact(
                 name = name,
                 phone = phone,
                 email = email,
                 comment = comment,
-                groupId = viewModel.groupId
+                groupId = viewModel.groupId,
+                facebookId = facebookId
             )
             viewModel.saveContact(contact)
             it.findNavController().popBackStack()
