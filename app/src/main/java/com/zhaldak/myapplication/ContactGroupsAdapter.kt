@@ -49,7 +49,6 @@ class GroupsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val titleTxt = view.titleTxt
     val descriptionTxt = view.descriptionTxt
     val card = view.card
-    val buttonAdd = view.imageAdd
     val countTxt = view.countTxt
     val rootLayout = view.rootLayout
 }
