@@ -14,4 +14,8 @@
     <string name="comments">Comments</string>
     <string name="save">Save contact</string>
     <string name="facebook_id">Facebook id</string>
+    <string name="action_call">Call</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_fb">Facebook</string>
+    <string name="action_delete">Delete</string>
 </resources>

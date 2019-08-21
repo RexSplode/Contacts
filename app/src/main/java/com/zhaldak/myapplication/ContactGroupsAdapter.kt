@@ -1,6 +1,5 @@
 package com.zhaldak.myapplication
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -12,12 +11,12 @@ import com.zhaldak.myapplication.datadase.ContactGroupWithContacts
 import kotlinx.android.synthetic.main.contact_group_card.view.*
 
 class ContactGroupsAdapter(private val items: List<ContactGroupWithContacts>,
-                           val contect: Context,
-                           private val addContactViewModel: AddContactViewModel) :
+                           val context: Context,
+                           private val contactsViewModel: ContactsViewModel) :
     RecyclerView.Adapter<GroupsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupsViewHolder {
-        return GroupsViewHolder(LayoutInflater.from(contect)
+        return GroupsViewHolder(LayoutInflater.from(context)
             .inflate(R.layout.contact_group_card, parent, false))
     }
 
@@ -32,19 +31,16 @@ class ContactGroupsAdapter(private val items: List<ContactGroupWithContacts>,
 
         holder.countTxt.text = "${groupWithContacts.contacts.size}"
 
-        holder.buttonAdd.setOnClickListener {
+        holder.rootLayout.setOnClickListener {
+            contactsViewModel.contactGroup = groupWithContacts
             val navController = it.findNavController()
-            addContactViewModel.groupId = group.id!!
-            navController.navigate(R.id.addContactFragment)
+            navController.navigate(R.id.contactsFragment)
         }
 
     }
 
-
     // Gets the number of animals in the list
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount(): Int = items.size
 
 }
 
@@ -55,4 +51,5 @@ class GroupsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val card = view.card
     val buttonAdd = view.imageAdd
     val countTxt = view.countTxt
+    val rootLayout = view.rootLayout
 }

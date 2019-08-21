@@ -7,10 +7,15 @@
             android:name="com.zhaldak.myapplication.ContactGroupsFragment"
             android:label="Blank"
             tools:layout="@layout/contact_groups_fragment" >
-        <action android:id="@+id/action_contactGroupsFragment_to_addContactFragment"
+        <action android:id="@+id/action_contactGroupsFragment_to_contactsFragment"
+                app:destination="@id/contactsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/addContactFragment" android:name="com.zhaldak.myapplication.AddOrEditContactFragment"
+              android:label="add_contact_fragment" tools:layout="@layout/add_contact_fragment"/>
+    <fragment android:id="@+id/contactsFragment" android:name="com.zhaldak.myapplication.ContactsFragment"
+              android:label="ContactsFragment">
+        <action android:id="@+id/action_contactsFragment_to_addContactFragment"
                 app:destination="@id/addContactFragment"/>
     </fragment>
-    <fragment android:id="@+id/addContactFragment" android:name="com.zhaldak.myapplication.AddContactFragment"
-              android:label="add_contact_fragment" tools:layout="@layout/add_contact_fragment"/>
 
 </navigation>
